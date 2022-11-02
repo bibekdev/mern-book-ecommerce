@@ -4,6 +4,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 require('dotenv').config()
 const userRoutes = require('./routes/user')
+const errorHandler = require('./middlewares/errorHandler')
 
 const app = express()
 
@@ -12,6 +13,8 @@ app.use(morgan('dev'))
 app.use(cors())
 
 app.use('/api/user', userRoutes)
+
+app.use(errorHandler)
 
 mongoose
   .connect(process.env.DATABASE)
