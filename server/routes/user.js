@@ -5,7 +5,7 @@ const {
   registerChecker,
   validationReqSender,
   loginChecker,
-} = require('../validator/userValidator')
+} = require('../validator/validator')
 const router = express.Router()
 
 router.post('/register', registerChecker, validationReqSender, createUser)
