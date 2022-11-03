@@ -47,5 +47,5 @@ exports.updateCategory = asyncHandler(async (req, res) => {
 
 exports.removeCategory = asyncHandler(async (req, res) => {
   await Category.findByIdAndDelete(req.params.id)
-  res.status(200).json({ message: 'User deleted successfully' })
+  res.status(200).json({ message: 'Category deleted successfully' })
 })
