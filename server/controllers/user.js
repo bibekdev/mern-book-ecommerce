@@ -51,3 +51,16 @@ exports.loginUser = asyncHandler(async (req, res) => {
 
   res.status(200).json({ token })
 })
+
+exports.updateUser = asyncHandler(async (req, res) => {
+  const { address } = req.body
+  const user = await User.findByIdAndUpdate(
+    req.userId,
+    {
+      address,
+      ...req.body,
+    },
+    { new: true }
+  ).select('-password')
+  res.status(200).json(user)
+})
