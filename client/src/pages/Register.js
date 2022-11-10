@@ -1,19 +1,17 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { api } from '../api'
-import { toast } from 'react-hot-toast'
 import { useAuth } from '../context/auth'
 
-const Login = () => {
-  const { loginUser } = useAuth()
+const Register = () => {
+  const { registerUser } = useAuth()
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm()
   const onSubmit = inputs => {
-    loginUser(inputs)
+    registerUser(inputs)
   }
   return (
     <Box
@@ -35,10 +33,25 @@ const Login = () => {
           py: 8,
         }}>
         <Typography variant='h2' component='h2' sx={{ textAlign: 'center' }}>
-          Login
+          Register
         </Typography>
         <Box width='50%' sx={{ mx: 'auto' }}>
           <form onSubmit={handleSubmit(onSubmit)}>
+            <TextField
+              placeholder='Name'
+              type='text'
+              fullWidth
+              sx={{ mt: 3 }}
+              {...register('name', { required: true })}
+            />
+            {errors.name && (
+              <Typography
+                variant='body1'
+                component='span'
+                sx={{ color: 'red' }}>
+                Name is required
+              </Typography>
+            )}
             <TextField
               placeholder='Email'
               type='email'
@@ -75,17 +88,17 @@ const Login = () => {
               variant='contained'
               fullWidth
               sx={{ mt: 3 }}>
-              Login
+              Register
             </Button>
           </form>
           <Typography variant='body1' sx={{ mt: 2 }}>
-            Don't have account?{' '}
+            Already have account?{' '}
             <Typography
               variant='body1'
               sx={{ color: '#000' }}
               component={Link}
-              to='/register'>
-              Register
+              to='/login'>
+              Login
             </Typography>
           </Typography>
         </Box>
@@ -94,4 +107,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Register

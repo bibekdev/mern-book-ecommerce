@@ -1,7 +1,17 @@
-import { AppBar, Box, Container, Toolbar, Typography } from '@mui/material'
+import {
+  AppBar,
+  Avatar,
+  Box,
+  Container,
+  IconButton,
+  Toolbar,
+  Typography,
+} from '@mui/material'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../context/auth'
 
 const Navbar = () => {
+  const { isAuthenticated } = useAuth()
   return (
     <AppBar position='sticky' sx={{ boxShadow: 'sm' }}>
       <Toolbar>
@@ -37,13 +47,19 @@ const Navbar = () => {
             </Typography>
           </div>
           <div>
-            <Typography
-              variant='body2'
-              component={Link}
-              to='/login'
-              sx={{ color: 'white' }}>
-              Login
-            </Typography>
+            {isAuthenticated ? (
+              <IconButton>
+                <Avatar />
+              </IconButton>
+            ) : (
+              <Typography
+                variant='body2'
+                component={Link}
+                to='/login'
+                sx={{ color: 'white' }}>
+                Login
+              </Typography>
+            )}
           </div>
         </Box>
       </Toolbar>
